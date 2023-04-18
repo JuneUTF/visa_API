@@ -1,5 +1,9 @@
 package com.example.VisaAPI.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.http.ResponseEntity;
@@ -16,22 +20,35 @@ public class UserDeleteController {
 		UserDeleteService userDeleteService;
 		@PostMapping("/delete")
 		public ResponseEntity<UserDeleteModel> SelectByUsernameRole(@RequestBody UserDeleteModel userDeleteModel){
-
-			int userRole = userDeleteService.DeleteByUsernameRole(userDeleteModel);
-			if(userRole == 1) {
-				userDeleteModel.setStatusRole("DELETED");
-				userDeleteModel.setStatus("SUCCESS");
-				int information = userDeleteService.DeleteByUsernameUser(userDeleteModel);
-				if(information == 1) {
-					userDeleteModel.setStatusInformation("DELETED");
+			LocalDateTime currentDateTime = LocalDateTime.now();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+			String formattedDateTime = currentDateTime.format(formatter);
+			List<UserDeleteModel>  user = userDeleteService.CheckDeleteByUsername(userDeleteModel);
+			if(user.size()!=0) {
+				userDeleteModel.setNote(formattedDateTime +"に"+ userDeleteModel.getLoginUsername()+"が削除しました");
+				int userRole = userDeleteService.DeleteByUsernameRole(userDeleteModel);
+				if(userRole == 1) {
+						userDeleteModel.setStatusRole("DELETED");
+							userDeleteModel.setStatus("SUCCESS");
+							int information = userDeleteService.DeleteByUsernameUser(userDeleteModel);
+								if(information == 1) {
+									userDeleteModel.setStatusInformation("DELETED");
+								}else {
+									userDeleteModel.setStatusInformation("在留カード情報がありません");
+								}
+					}else {
+						userDeleteModel.setNote(formattedDateTime +"に"+ userDeleteModel.getLoginUsername()+"が削除されませんでした");
+						userDeleteModel.setStatusRole("ERROR");
+						userDeleteModel.setStatusInformation("ERROR");
+						userDeleteModel.setStatus("DEFEATED");
+					}
 				}else {
-					userDeleteModel.setStatusInformation("在留カード情報がありません");
+					userDeleteModel.setStatusRole("ERROR");
+					userDeleteModel.setStatusInformation("ERROR");
+					userDeleteModel.setStatus("DEFEATED");
+					userDeleteModel.setNote(formattedDateTime +"に"+ userDeleteModel.getUsername()+"が削除されたまたは存じません");
+					return ResponseEntity.ok(userDeleteModel);
 				}
-			}else {
-				userDeleteModel.setStatusRole("ERROR");
-				userDeleteModel.setStatusInformation("ERROR");
-				userDeleteModel.setStatus("DEFEATED");
-			}
 			return ResponseEntity.ok(userDeleteModel);
 		}
 }

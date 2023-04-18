@@ -17,17 +17,20 @@ public class LoginController {
 	LoginService loginService;
 
 	 @PostMapping("/login")
-	   public  ResponseEntity<List<LoginModel>> findByUsername(@RequestBody LoginModel loginModel) {
-		 System.out.println(loginModel);
+	   public  ResponseEntity<LoginModel> findByUsername(@RequestBody LoginModel loginModel) {
 		 //ユーザー情報をチャックします。
 		 List<LoginModel> user = loginService.findByUsername(loginModel);
 		 	if(user.size()>0) {
 //		 		ユーザー名とパスワードが正しい
-		 		user.get(0).setPassword("ログインできました");
-			 		return ResponseEntity.ok(user);
+		 		loginModel.setRole(user.get(0).getRole());
+		 		loginModel.setPassword("ログインできました");
+		 		loginModel.setStatus("SUCCESS");
+			 		return ResponseEntity.ok(loginModel);
 		 	}else {
 //		 		ユーザー名とパスワードが正しくない
-				return ResponseEntity.ok(user);
+//		 		status 設定
+		 		loginModel.setStatus("DEFEATED");
+				return ResponseEntity.ok(loginModel);
 		 	}
 	    }
 }

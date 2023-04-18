@@ -1,5 +1,7 @@
 package com.example.VisaAPI.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -19,4 +21,11 @@ public class UserDeleteImpl implements UserDeleteService{
 		public int  DeleteByUsernameUser(UserDeleteModel userDeleteModel){
 			return mapper.DeleteByUsernameUser(userDeleteModel);
 		}
+		public List<UserDeleteModel> CheckDeleteByUsername(UserDeleteModel userDeleteModel){
+			return mapper.CheckDeleteByUsername(userDeleteModel);
+		}
+		public List<UserDeleteModel> CheckDeleteByUsernameInformation(UserDeleteModel userDeleteModel){
+			return CheckDeleteByUsernameInformation(userDeleteModel);
+		}
+	
 }

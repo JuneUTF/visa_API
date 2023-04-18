@@ -7,7 +7,7 @@
     <select id="findByUsername" resultType="com.example.VisaAPI.model.LoginModel" >
     SELECT username, password,role,status
 	FROM visa_user_api_role
-	WHERE username = #{username} and password = #{password}
+	WHERE username = #{username} and password = #{password} and status='ACTIVE'
     </select>
 
 </mapper>
