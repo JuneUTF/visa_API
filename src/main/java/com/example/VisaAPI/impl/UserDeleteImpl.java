@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.VisaAPI.mapper.UserDeleteMapper;
 import com.example.VisaAPI.model.UserDeleteModel;
+import com.example.VisaAPI.model.UserModel;
 import com.example.VisaAPI.service.UserDeleteService;
 
 @Service
@@ -24,8 +25,8 @@ public class UserDeleteImpl implements UserDeleteService{
 		public List<UserDeleteModel> CheckDeleteByUsername(UserDeleteModel userDeleteModel){
 			return mapper.CheckDeleteByUsername(userDeleteModel);
 		}
-		public List<UserDeleteModel> CheckDeleteByUsernameInformation(UserDeleteModel userDeleteModel){
-			return CheckDeleteByUsernameInformation(userDeleteModel);
+		public List<UserModel> SelectDeleteByUsername(UserModel userModel){
+			return mapper.SelectDeleteByUsername(userModel);
 		}
 	
 }

@@ -13,8 +13,10 @@
     <select id="CheckDeleteByUsername" resultType="com.example.VisaAPI.model.UserDeleteModel">
     	select note,username from visa_user_api_role where status = 'DELETE' and username = #{username}
 	</select>
-	<select id="CheckDeleteByUsernameInformation" resultType="com.example.VisaAPI.model.UserDeleteModel">
-    	select note from visa_user_api_role where status = 'DELETE'
+	<select id="SelectDeleteByUsername" resultType="com.example.VisaAPI.model.UserModel">
+		SELECT    id,username,visa_id,name,birthday,sex,country,address,visa_date,visa_type
+		FROM visa_user_api WHERE username = #{username} AND status = 'ACTIVE'
+
 	</select>
 
 </mapper>
