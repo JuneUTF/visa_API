@@ -11,12 +11,13 @@
     	UPDATE visa_user_api SET status = 'DELETE',note=#{note} WHERE username = #{username}
     </update>
     <select id="CheckDeleteByUsername" resultType="com.example.VisaAPI.model.UserDeleteModel">
-    	select note,username from visa_user_api_role where status = 'DELETE' and username = #{username}
+    	select note,username,role from visa_user_api_role where status = 'ACTIVE' and username = #{username}
 	</select>
 	<select id="SelectDeleteByUsername" resultType="com.example.VisaAPI.model.UserModel">
 		SELECT    id,username,visa_id,name,birthday,sex,country,address,visa_date,visa_type
 		FROM visa_user_api WHERE username = #{username} AND status = 'ACTIVE'
-
 	</select>
-
+	<select id="CheckRoleLoginUser" resultType="com.example.VisaAPI.model.UserDeleteModel">
+		select role from visa_user_api_role where username=#{loginUsername}
+	</select>
 </mapper>

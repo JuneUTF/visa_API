@@ -10,6 +10,7 @@ import com.example.VisaAPI.model.UserModel;
 public interface UserDeleteMapper {
 	int DeleteByUsernameRole(UserDeleteModel userDeleteModel);
 	int DeleteByUsernameUser(UserDeleteModel userDeleteModel);
+	List<UserDeleteModel> CheckRoleLoginUser(UserDeleteModel userDeleteModel);
 	List<UserDeleteModel> CheckDeleteByUsername(UserDeleteModel userDeleteModel);
 	List<UserModel> SelectDeleteByUsername(UserModel userModel);
 }

@@ -22,6 +22,9 @@ public class UserDeleteImpl implements UserDeleteService{
 		public int  DeleteByUsernameUser(UserDeleteModel userDeleteModel){
 			return mapper.DeleteByUsernameUser(userDeleteModel);
 		}
+		public List<UserDeleteModel> CheckRoleLoginUser(UserDeleteModel userDeleteModel){
+			return mapper.CheckRoleLoginUser(userDeleteModel);
+		}
 		public List<UserDeleteModel> CheckDeleteByUsername(UserDeleteModel userDeleteModel){
 			return mapper.CheckDeleteByUsername(userDeleteModel);
 		}
