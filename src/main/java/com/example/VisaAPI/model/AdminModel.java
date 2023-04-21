@@ -1,0 +1,22 @@
+package com.example.VisaAPI.model;
+
+import lombok.Data;
+
+@Data
+public class AdminModel {
+	
+	public int id;
+	private String username;
+	private String visa_id;
+	private String name;
+	private String sex;
+	private String country;
+	private String address;
+	private String visa_data;
+	private String visa_type;
+	private String status;
+	private String note;
+	
+	
+
+}
