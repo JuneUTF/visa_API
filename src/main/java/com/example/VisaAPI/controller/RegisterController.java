@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.VisaAPI.model.RegisterModel;
-import com.example.VisaAPI.model.RegisterResponseModel;
 import com.example.VisaAPI.service.RegisterService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +35,7 @@ public class RegisterController {
 	
 
 	@PostMapping("/register")
-	public ResponseEntity<?> registerPost (@Validated @RequestBody  RegisterModel registerModel,RegisterResponseModel registerResponseModel, BindingResult result,Model model) {
+	public ResponseEntity<?> registerPost (@Validated @RequestBody  RegisterModel registerModel, BindingResult result,Model model) {
 		log.info("{}", registerModel);
 		if (result.hasErrors()) {
 	            List<String> errorList = new ArrayList<String>();
