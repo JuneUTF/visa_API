@@ -1,7 +1,6 @@
 package com.example.VisaAPI.model;
 
 import java.sql.Date;
-import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -36,7 +35,8 @@ public class RegisterModel {
     private String visa_ID;
 	
 	
-
+	@NotEmpty(message = "ビザ期限を入力してください")
+	private String visakigen;
     private Date visa_date;
 	
 	@NotEmpty(message = "ビザ種類を選択してください")
@@ -50,7 +50,6 @@ public class RegisterModel {
     
     
 	private String information;
-	private List<String> errorList;
     public RegisterModel() {
 		
 	}

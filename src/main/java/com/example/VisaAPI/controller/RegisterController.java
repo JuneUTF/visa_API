@@ -36,18 +36,20 @@ public class RegisterController {
 	
 
 	@PostMapping("/register")
-	public ResponseEntity<RegisterModel> registerPost (@RequestBody @Validated RegisterModel registerModel,RegisterResponseModel registerResponseModel, BindingResult result,Model model) {
+	public ResponseEntity<?> registerPost (@Validated @RequestBody  RegisterModel registerModel,RegisterResponseModel registerResponseModel, BindingResult result,Model model) {
 		log.info("{}", registerModel);
 		if (result.hasErrors()) {
 	            List<String> errorList = new ArrayList<String>();
 	            for (ObjectError error : result.getAllErrors()) {
 	                errorList.add(error.getDefaultMessage());
 	            }
-	            registerModel.setErrorList(errorList);
+
+	            System.out.println("fgdgdgd");
+	            System.out.println(errorList);
             return ResponseEntity.ok(registerModel);
         }else {
 				
-			//DATEのデータ型を変更
+			//birthdayのDATEのデータ型を変更
 			String inputDate = registerModel.getDateofbirth();
 			try {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -58,11 +60,28 @@ public class RegisterController {
 				registerModel.setBirthday(sqlDate);
 			} catch (Exception e) {
 //				変更出来ないは登録できませんとエラー表示
-	            registerModel.setInformation("登録が失敗しました。");
+	            registerModel.setInformation("birthdayが修正");
 	            log.info("{}", registerModel);
 //				この辺はまだ分からん。
 				return ResponseEntity.ok(registerModel);
 			}
+			//visa_dateのDATEのデータ型を変更
+			
+			String inputkigen = registerModel.getVisakigen();
+			try {
+				SimpleDateFormat sdfkigen = new SimpleDateFormat("yyyy-MM-dd");
+				java.util.Date datekigen = sdfkigen.parse(inputkigen);
+				Date sqlDatekigen = new Date(datekigen.getTime());
+				log.info("{}", registerModel);
+//				変更したビザ期限をuserregisterModelに設定
+				registerModel.setBirthday(sqlDatekigen);
+			} catch (Exception e) {
+//				変更出来ないは登録できませんとエラー表示
+	            registerModel.setInformation("ビザ期限が修正");
+	            log.info("{}", registerModel);
+				return ResponseEntity.ok(registerModel);
+			}
+			
 			List<RegisterModel> user = registerService.getuser(registerModel);		
 			log.info("{}", registerModel);
 			if(user.size()!=0) {
