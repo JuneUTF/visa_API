@@ -28,8 +28,8 @@ public class RegisterModel {
 	
 	
 	@NotEmpty(message = "生年月日を選択してください")
-	private String dateofbirth;
-    private Date birthday;
+    private String birthday;
+	private Date dateofbirth;
 	
 	
 	@NotEmpty(message = "在留カード番号を入力してください")
@@ -37,8 +37,8 @@ public class RegisterModel {
 	
 	
 	@NotEmpty(message = "ビザ期限を入力してください")
-	private String visakigen;
-    private Date visa_date;
+	private String visa_date;
+    private Date visakigen;
 	
 	@NotEmpty(message = "ビザ種類を選択してください")
     private String visa_type;
