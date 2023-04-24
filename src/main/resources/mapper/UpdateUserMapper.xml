@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.VisaAPI.mapper.UpdateUserMapper">
+
+	<select id="selectuserbyId"
+		resultType="com.example.VisaAPI.model.UpdateUserModel">
+		SELECT *
+		FROM visa_user_api
+		WHERE username = #{username} ;
+
+	</select>
+	<update id="updateuser"
+		parameterType="com.example.VisaAPI.model.UpdateUserModel">
+		UPDATE visa_user_api SET
+		visa_id=#{visa_id},"birthday"=#{dateofbirth} ,"sex"=#{sex},"country"=#{country},"address"=#{address},"visa_date"=#{visakigen},"visa_type"=#{visa_type},"note"=#{note}
+		WHERE username = #{username}
+	</update>
+
+</mapper>

@@ -10,6 +10,7 @@ import com.example.VisaAPI.mapper.ResetPassMapper;
 import com.example.VisaAPI.model.ResetPassModel;
 import com.example.VisaAPI.service.ResetPassService;
 
+
 @Service
 public class ResetPassImpl implements ResetPassService {
 	@Resource
