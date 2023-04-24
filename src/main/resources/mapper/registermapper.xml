@@ -7,7 +7,7 @@
 
 <insert id="saveUser" parameterType="com.example.VisaAPI.model.RegisterModel"  >
     INSERT INTO visa_user_api(username,name,sex, birthday,visa_ID,visa_date,visa_type,country,address,status) 
-VALUES (#{username},#{name},#{sex},#{birthday},#{visa_ID},#{visa_date},#{visa_type},#{country},#{address},'ACTIVE');
+VALUES (#{username},#{name},#{sex},#{dateofbirth},#{visa_ID},#{visakigen},#{visa_type},#{country},#{address},'ACTIVE');
 INSERT INTO visa_user_api_role (username,password,status,role)VALUES(#{username},#{password},'ACTIVE','USER');
 
 </insert>
