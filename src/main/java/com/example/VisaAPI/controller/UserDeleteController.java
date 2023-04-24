@@ -3,6 +3,7 @@ package com.example.VisaAPI.controller;
 import javax.annotation.Resource;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.VisaAPI.model.UserDeleteModel;
 import com.example.VisaAPI.service.UserDeleteService;
 
+
+@CrossOrigin("http://localhost:3000/delete")
 @RestController
 public class UserDeleteController {
 		@Resource

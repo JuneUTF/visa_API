@@ -42,21 +42,19 @@ public class RegisterController {
 	            for (ObjectError error : result.getAllErrors()) {
 	                errorList.add(error.getDefaultMessage());
 	            }
-
-	            System.out.println("fgdgdgd");
 	            System.out.println(errorList);
-            return ResponseEntity.ok(registerModel);
+            return ResponseEntity.status(400).body(errorList);
         }else {
 				
 			//birthdayのDATEのデータ型を変更
-			String inputDate = registerModel.getDateofbirth();
+			String inputDate = registerModel.getBirthday();
 			try {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				java.util.Date date = sdf.parse(inputDate);
 				Date sqlDate = new Date(date.getTime());
 				log.info("{}", registerModel);
 //				変更したビザ期限をuserregisterModelに設定
-				registerModel.setBirthday(sqlDate);
+				registerModel.setDateofbirth(sqlDate);
 			} catch (Exception e) {
 //				変更出来ないは登録できませんとエラー表示
 	            registerModel.setInformation("birthdayが修正");
@@ -66,14 +64,14 @@ public class RegisterController {
 			}
 			//visa_dateのDATEのデータ型を変更
 			
-			String inputkigen = registerModel.getVisakigen();
+			String inputkigen = registerModel.getVisa_date();
 			try {
 				SimpleDateFormat sdfkigen = new SimpleDateFormat("yyyy-MM-dd");
 				java.util.Date datekigen = sdfkigen.parse(inputkigen);
 				Date sqlDatekigen = new Date(datekigen.getTime());
 				log.info("{}", registerModel);
 //				変更したビザ期限をuserregisterModelに設定
-				registerModel.setBirthday(sqlDatekigen);
+				registerModel.setVisakigen(sqlDatekigen);
 			} catch (Exception e) {
 //				変更出来ないは登録できませんとエラー表示
 	            registerModel.setInformation("ビザ期限が修正");
@@ -84,7 +82,7 @@ public class RegisterController {
 			List<RegisterModel> user = registerService.getuser(registerModel);		
 			log.info("{}", registerModel);
 			if(user.size()!=0) {
-	            registerModel.setInformation("存在しました");
+	            registerModel.setInformation("アカウントが存在しました");
 				
 	            log.info("{}", registerModel);
 				log.info("{}", user);
@@ -94,7 +92,7 @@ public class RegisterController {
 			}else {
 				registerModel.setInformation("Insertできました");
 				registerService.saveUser(registerModel);
-				return ResponseEntity.ok(registerModel) ;
+				return ResponseEntity.ok(registerModel.getInformation()) ;
 			}
 			
 			
