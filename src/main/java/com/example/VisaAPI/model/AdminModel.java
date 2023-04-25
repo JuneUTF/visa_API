@@ -12,7 +12,7 @@ public class AdminModel {
 	private String sex;
 	private String country;
 	private String address;
-	private String visa_data;
+	private String visa_date;
 	private String visa_type;
 	private String status;
 	private String note;
