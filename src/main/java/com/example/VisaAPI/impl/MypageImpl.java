@@ -14,8 +14,8 @@ public class MypageImpl implements MypageService {
 	@Resource
 	MypageMapper mapper;
 	@Override
-	public List<MypageModel> SelectByUsername(MypageModel mypageModel){
-		return mapper.SelectByUsername(mypageModel);
+	public List<MypageModel> SelectByUsername(String username){
+		return mapper.SelectByUsername(username);
 	}
 
 }

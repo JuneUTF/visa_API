@@ -8,6 +8,6 @@ import com.example.VisaAPI.model.MypageModel;
 
 @Mapper
 public interface MypageMapper {
-	List<MypageModel> SelectByUsername(MypageModel mypageModel);
+	List<MypageModel> SelectByUsername(String username);
 
 }
