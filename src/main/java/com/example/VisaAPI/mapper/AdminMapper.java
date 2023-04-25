@@ -10,13 +10,10 @@ import com.example.VisaAPI.model.AdminModel;
 @Repository
 @Mapper
 public interface AdminMapper {	
-
-
-
 		List<AdminModel> selectAll(AdminModel adminModel);
-		List<AdminModel> selectuser(AdminModel adminModel);
-	
-		
+		List<AdminModel> selectDeleted(AdminModel adminModel);
+		List<AdminModel> selectActive(AdminModel adminModel);
+		List<AdminModel> CheckRoleAdmin(AdminModel adminModel);
 	}
 
  

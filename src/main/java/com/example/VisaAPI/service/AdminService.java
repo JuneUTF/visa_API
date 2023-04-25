@@ -6,10 +6,10 @@ import com.example.VisaAPI.model.AdminModel;
 
 
 	public interface AdminService {
-		
-
 		public List<AdminModel> selectAll(AdminModel adminModel);
-		public List<AdminModel> selectuser(AdminModel adminModel);
+		List<AdminModel> selectDeleted(AdminModel adminModel);
+		List<AdminModel> selectActive(AdminModel adminModel);
+		public List<AdminModel> CheckRoleAdmin(AdminModel adminModel);
 	
 	}
 		

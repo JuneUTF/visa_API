@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import com.example.VisaAPI.model.UpdateModel;
 import com.example.VisaAPI.service.UpdateService;
 
 @RestController
+@CrossOrigin
 public class UpdateController {
 
     @Resource

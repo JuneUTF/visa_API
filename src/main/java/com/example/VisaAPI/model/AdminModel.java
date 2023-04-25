@@ -6,7 +6,8 @@ import lombok.Data;
 public class AdminModel {
 	
 	public int id;
-	private String username;
+	private String username;;
+	private String role;
 	private String visa_id;
 	private String name;
 	private String sex;

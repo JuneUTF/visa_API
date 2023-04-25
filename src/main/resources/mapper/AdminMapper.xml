@@ -7,7 +7,13 @@
     <select id="selectAll" resultType="com.example.VisaAPI.model.AdminModel">
         SELECT * FROM visa_user_api ;
     </select>
-<select id="selectuser" resultType="com.example.VisaAPI.model.AdminModel">
-        SELECT * FROM visa_user_api where username=#{username} ;
+    <select id="selectDeleted" resultType="com.example.VisaAPI.model.AdminModel">
+        SELECT * FROM visa_user_api where status='DELETE';
+    </select>
+    <select id="selectActive" resultType="com.example.VisaAPI.model.AdminModel">
+        SELECT * FROM visa_user_api where status='ACTIVE';
+    </select>
+<select id="CheckRoleAdmin" resultType="com.example.VisaAPI.model.AdminModel">
+        SELECT role FROM visa_user_api_role where username=#{username} AND status='ACTIVE'
     </select>
 </mapper>
