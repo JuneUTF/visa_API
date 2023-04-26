@@ -28,7 +28,8 @@ public class UpdateUserController {
 	@Resource
 	UpdateUserService updateUserService;
 	@GetMapping("update/{username}")
-	public ResponseEntity<?> Update(@PathVariable("username") String username,@RequestBody UpdateUserModel updateUserModel) {
+	public ResponseEntity<?> Update(@PathVariable String username, UpdateUserModel updateUserModel) {
+		System.out.println(updateUserModel.getUsername());
 	List<UpdateUserModel> user =updateUserService.selectuserbyId(updateUserModel);
 	return ResponseEntity.ok(user);
 	}
@@ -49,7 +50,7 @@ public class UpdateUserController {
 		//変更できない場合updateできないで、エラー表示します
 		return ResponseEntity.status(400).body("birthday誤入力");
 	}
-
+	
 	//visa_date DATE型を変更
 		String inputkigen = updateUserModel.getVisa_date();
 		try {
@@ -65,10 +66,12 @@ public class UpdateUserController {
 			return ResponseEntity.status(400).body("birthday誤入力");
 
 		}
-	List<UpdateUserModel> user =updateUserService.selectuserbyId(updateUserModel);
+	
 	int count = updateUserService.updateuser(updateUserModel);
+	System.out.println(updateUserModel.getUsername());
 	if (count == 1) {
 		updateUserModel.setNote("updateできました");
+		
 		log.info("{}",updateUserModel);
 
 		return ResponseEntity.ok(updateUserModel);
