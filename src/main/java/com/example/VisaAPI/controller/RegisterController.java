@@ -38,10 +38,8 @@ public class RegisterController {
 	            for (ObjectError error : result.getAllErrors()) {
 	                errorList.add(error.getDefaultMessage());
 	            }
-
-	            System.out.println("fgdgdgd");
 	            System.out.println(errorList);
-            return ResponseEntity.ok(registerModel);
+            return ResponseEntity.ok(errorList);
         }else {
 				
         	//birthdayのDATEのデータ型を変更

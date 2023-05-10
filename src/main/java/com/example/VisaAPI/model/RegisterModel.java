@@ -23,6 +23,9 @@ public class RegisterModel {
     private String name;
 	
 	
+	@NotEmpty(message = "名前を入力してください")
+	private String hiragana;
+	
 	@NotEmpty(message = "性別を選択してください")
     private String sex;
 	
