@@ -50,7 +50,7 @@ public class RestPassController {
 
 				}
 			}
-			return ResponseEntity.status(400).body("aaaa");
+			return ResponseEntity.status(400).body("DATE変更できない");
 		}else {
 			return ResponseEntity.status(400).body("新しいパスワードと再入力パスワードが違います");
 		}
