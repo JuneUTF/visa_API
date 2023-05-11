@@ -39,7 +39,7 @@ public class UpdateUserController {
 	//birthday DATE型を変更
 	String inputbirth = updateUserModel.getBirthday();
 	try {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		java.util.Date date = sdf.parse(inputbirth);
 		Date sqlDate = new Date(date.getTime());
 		log.info("{}",updateUserModel);
@@ -54,7 +54,7 @@ public class UpdateUserController {
 	//visa_date DATE型を変更
 		String inputkigen = updateUserModel.getVisa_date();
 		try {
-			SimpleDateFormat sdfkigen = new SimpleDateFormat("yyyy-mm-dd");
+			SimpleDateFormat sdfkigen = new SimpleDateFormat("yyyy/MM/dd");
 			java.util.Date datekigen = sdfkigen.parse(inputkigen);
 			Date sqlDatekigen = new Date(datekigen.getTime());
 			log.info("{}",updateUserModel);

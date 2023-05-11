@@ -45,7 +45,7 @@ public class RegisterController {
         	//birthdayのDATEのデータ型を変更
 			String inputDate = registerModel.getBirthday();
 			try {
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 				java.util.Date date = sdf.parse(inputDate);
 				Date sqlDate = new Date(date.getTime());
 				log.info("{}", registerModel);
@@ -62,7 +62,7 @@ public class RegisterController {
 			
 			String inputkigen = registerModel.getVisa_date();
 			try {
-				SimpleDateFormat sdfkigen = new SimpleDateFormat("yyyy-MM-dd");
+				SimpleDateFormat sdfkigen = new SimpleDateFormat("yyyy/MM/dd");
 				java.util.Date datekigen = sdfkigen.parse(inputkigen);
 				Date sqlDatekigen = new Date(datekigen.getTime());
 				log.info("{}", registerModel);

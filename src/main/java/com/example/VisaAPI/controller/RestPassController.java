@@ -16,14 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.VisaAPI.model.ResetPassModel;
 import com.example.VisaAPI.service.ResetPassService;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 @RestController
 @CrossOrigin
+@Slf4j
 public class RestPassController {
 	@Resource
 	ResetPassService resetPassService;
 	@PostMapping("forgetPassword")
 	public ResponseEntity<?> selectuser(@RequestBody ResetPassModel resetPassModel){
+		log.info("{}", resetPassModel);
 		if(resetPassModel.getNewpassword().equals(resetPassModel.getConfirmnewpass())) {
 	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 	        java.util.Date utilDate = null;
@@ -46,10 +50,9 @@ public class RestPassController {
 
 				}
 			}
-			return ResponseEntity.notFound().build();
+			return ResponseEntity.status(400).body("aaaa");
 		}else {
-
-			return ResponseEntity.notFound().build();
+			return ResponseEntity.status(400).body("新しいパスワードと再入力パスワードが違います");
 		}
 
 	}
