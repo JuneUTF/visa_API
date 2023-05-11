@@ -16,7 +16,7 @@
 		parameterType="com.example.VisaAPI.model.UpdateUserModel">
 		UPDATE visa_user_api 
 		SET
-		visa_id=#{visa_id},birthday=#{dateofbirth} ,sex=#{sex},country=#{country},address=#{address},visa_date=#{visakigen},visa_type=#{visa_type},note=#{note}
+		name=#{name},visa_id=#{visa_id},birthday=#{dateofbirth} ,sex=#{sex},country=#{country},address=#{address},visa_date=#{visakigen},visa_type=#{visa_type},note=#{note}
 		WHERE username = #{username} AND  status='ACTIVE';
 	</update>
 

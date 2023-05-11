@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 public class UpdateUserModel {
 	private String username;
+	private String name;
 	private String visa_id;
 
 	private String birthday;
