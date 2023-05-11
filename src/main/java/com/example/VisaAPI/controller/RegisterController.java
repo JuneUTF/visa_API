@@ -45,7 +45,7 @@ public class RegisterController {
         	//birthdayのDATEのデータ型を変更
 			String inputDate = registerModel.getBirthday();
 			try {
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				java.util.Date date = sdf.parse(inputDate);
 				Date sqlDate = new Date(date.getTime());
 				log.info("{}", registerModel);
@@ -53,7 +53,7 @@ public class RegisterController {
 				registerModel.setDateofbirth(sqlDate);
 			} catch (Exception e) {
 //				変更出来ないは登録できませんとエラー表示
-	            registerModel.setInformation("birthdayが修正");
+	            registerModel.setInformation("birthdayが修正が必要");
 	            log.info("{}", registerModel);
 //				この辺はまだ分からん。
 				return ResponseEntity.ok(registerModel);
@@ -62,7 +62,7 @@ public class RegisterController {
 			
 			String inputkigen = registerModel.getVisa_date();
 			try {
-				SimpleDateFormat sdfkigen = new SimpleDateFormat("yyyy/MM/dd");
+				SimpleDateFormat sdfkigen = new SimpleDateFormat("yyyy-MM-dd");
 				java.util.Date datekigen = sdfkigen.parse(inputkigen);
 				Date sqlDatekigen = new Date(datekigen.getTime());
 				log.info("{}", registerModel);
@@ -70,7 +70,7 @@ public class RegisterController {
 				registerModel.setVisakigen(sqlDatekigen);
 			} catch (Exception e) {
 //				変更出来ないは登録できませんとエラー表示
-	            registerModel.setInformation("ビザ期限が修正");
+	            registerModel.setInformation("ビザ期限が修正が必要");
 	            log.info("{}", registerModel);
 				return ResponseEntity.ok(registerModel);
 			}

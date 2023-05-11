@@ -29,7 +29,7 @@ public class RestPassController {
 	public ResponseEntity<?> selectuser(@RequestBody ResetPassModel resetPassModel){
 		log.info("{}", resetPassModel);
 		if(resetPassModel.getNewpassword().equals(resetPassModel.getConfirmnewpass())) {
-	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	        java.util.Date utilDate = null;
 	        try {
 	            utilDate = sdf.parse(resetPassModel.getBirthday());
