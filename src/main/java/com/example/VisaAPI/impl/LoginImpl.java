@@ -13,6 +13,7 @@ import com.example.VisaAPI.service.LoginService;
 public class LoginImpl implements LoginService{
 	@Resource
 	LoginMapper mapper;
+	@Override
 	public List<LoginModel> findByUsername(LoginModel loginModel) {
 		return mapper.findByUsername(loginModel);
 	}
