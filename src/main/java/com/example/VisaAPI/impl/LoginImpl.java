@@ -1,7 +1,5 @@
 package com.example.VisaAPI.impl;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -13,7 +11,8 @@ import com.example.VisaAPI.service.LoginService;
 public class LoginImpl implements LoginService{
 	@Resource
 	LoginMapper mapper;
-	public List<LoginModel> findByUsername(LoginModel loginModel) {
+	@Override
+	public LoginModel findByUsername(LoginModel loginModel) {
 		return mapper.findByUsername(loginModel);
 	}
 }

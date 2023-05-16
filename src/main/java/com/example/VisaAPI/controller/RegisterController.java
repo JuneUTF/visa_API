@@ -7,16 +7,19 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.VisaAPI.model.RegisterModel;
+import com.example.VisaAPI.model.Reponse.ReponseModel;
 import com.example.VisaAPI.service.RegisterService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -25,28 +28,29 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
+@CrossOrigin
 public class RegisterController {
-
 	@Resource
 	RegisterService registerService;
-
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder; 
 	
-	
-	
-
 	@PostMapping("/register")
-	public ResponseEntity<?> registerPost (@Validated @RequestBody  RegisterModel registerModel, BindingResult result,Model model) {
+	public ResponseEntity<?> registerPost (@Validated @RequestBody  RegisterModel registerModel, BindingResult result,ReponseModel reponseModel) {
 		log.info("{}", registerModel);
 		if (result.hasErrors()) {
 	            List<String> errorList = new ArrayList<String>();
 	            for (ObjectError error : result.getAllErrors()) {
 	                errorList.add(error.getDefaultMessage());
 	            }
+	            reponseModel.setErrorlist(errorList);
+	            reponseModel.setCode(400);
+				reponseModel.setStatus("Defail");
 	            System.out.println(errorList);
-            return ResponseEntity.status(400).body(errorList);
+            return ResponseEntity.status(400).body(reponseModel);
         }else {
 				
-			//birthdayのDATEのデータ型を変更
+        	//birthdayのDATEのデータ型を変更
 			String inputDate = registerModel.getBirthday();
 			try {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -57,10 +61,13 @@ public class RegisterController {
 				registerModel.setDateofbirth(sqlDate);
 			} catch (Exception e) {
 //				変更出来ないは登録できませんとエラー表示
-	            registerModel.setInformation("birthdayが修正");
-	            log.info("{}", registerModel);
+	            reponseModel.setInformation("birthdayが修正が必要");
+	            reponseModel.setCode(400);
+				reponseModel.setStatus("Defail");
+				reponseModel.setData(registerModel);
+	            log.info("{}", reponseModel);
 //				この辺はまだ分からん。
-				return ResponseEntity.ok(registerModel);
+				return ResponseEntity.status(400).body(reponseModel);
 			}
 			//visa_dateのDATEのデータ型を変更
 			
@@ -74,25 +81,37 @@ public class RegisterController {
 				registerModel.setVisakigen(sqlDatekigen);
 			} catch (Exception e) {
 //				変更出来ないは登録できませんとエラー表示
-	            registerModel.setInformation("ビザ期限が修正");
-	            log.info("{}", registerModel);
-				return ResponseEntity.ok(registerModel);
+	            reponseModel.setInformation("ビザ期限が修正が必要");
+	            reponseModel.setCode(400);
+				reponseModel.setStatus("Defail");
+				reponseModel.setData(registerModel);
+	            log.info("{}", reponseModel);
+				return ResponseEntity.status(400).body(registerModel);
 			}
 			
 			List<RegisterModel> user = registerService.getuser(registerModel);		
 			log.info("{}", registerModel);
 			if(user.size()!=0) {
-	            registerModel.setInformation("アカウントが存在しました");
 				
 	            log.info("{}", registerModel);
 				log.info("{}", user);
-
-				return ResponseEntity.ok(registerModel) ;
+				reponseModel.setCode(400);
+				reponseModel.setStatus("Defail");
+				reponseModel.setInformation("存在しました");
+//				reponseModel.setData(registerModel);
+				return ResponseEntity.ok(reponseModel) ;
 				
 			}else {
-				registerModel.setInformation("Insertできました");
+				//encodePass 作成
+				registerModel.setEncodePass(passwordEncoder.encode(registerModel.getPassword()));
+				System.out.println(registerModel.getEncodePass());
 				registerService.saveUser(registerModel);
-				return ResponseEntity.ok(registerModel.getInformation()) ;
+				reponseModel.setCode(200);
+				reponseModel.setInformation("Insertできました");
+				reponseModel.setStatus("SUCCESS");
+				reponseModel.setData(registerModel);
+				log.info("{}",reponseModel);
+				return ResponseEntity.ok(reponseModel) ;
 			}
 			
 			

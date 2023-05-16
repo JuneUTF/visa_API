@@ -1,8 +1,12 @@
 package com.example.VisaAPI.model;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Data;
 
@@ -16,18 +20,20 @@ public class RegisterModel {
 	
 	@NotEmpty(message = "パスワードを入力してください")
     private String password;
-	
-	
+	@JsonIgnore
+	private String encodePass;
 	@NotEmpty(message = "名前を入力してください")
     private String name;
 	
 	
+
 	@NotEmpty(message = "性別を選択してください")
     private String sex;
 	
 	
 	@NotEmpty(message = "生年月日を選択してください")
     private String birthday;
+	@JsonIgnore
 	private Date dateofbirth;
 	
 	
@@ -36,8 +42,9 @@ public class RegisterModel {
 	
 	
 	@NotEmpty(message = "ビザ期限を入力してください")
-	private String visa_date;
-    private Date visakigen;
+    private String visa_date;
+	@JsonIgnore
+	private Date visakigen;
 	
 	@NotEmpty(message = "ビザ種類を選択してください")
     private String visa_type;
@@ -49,8 +56,10 @@ public class RegisterModel {
     private String address;
     
     
-	private String information;
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private List<String> errorList;
     public RegisterModel() {
 		
 	}
+	
 }

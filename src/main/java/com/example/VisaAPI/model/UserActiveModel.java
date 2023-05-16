@@ -3,7 +3,7 @@ package com.example.VisaAPI.model;
 import lombok.Data;
 
 @Data
-public class UserDeleteModel {
+public class UserActiveModel {
 	private String loginUsername;
 	private String username;
 	private String role;
