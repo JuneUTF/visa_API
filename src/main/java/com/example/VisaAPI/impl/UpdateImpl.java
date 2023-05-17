@@ -1,7 +1,5 @@
 package com.example.VisaAPI.impl;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -16,14 +14,9 @@ public class UpdateImpl implements UpdateService {
     @Resource
     private UpdateMapper mapper;
 
-    /**
-     * 新規作成
-     *
-     * @param user
-     */
 
     @Override
-    public List<UpdateModel> selectuser(UpdateModel updateModel){
+    public UpdateModel selectuser(UpdateModel updateModel){
         return mapper.selectuser(updateModel);
     }
 

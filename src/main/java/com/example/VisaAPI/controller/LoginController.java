@@ -27,7 +27,7 @@ public class LoginController {
 		 LoginModel user = loginService.findByUsername(loginModel);
 		 if (!brcypt.matches(loginModel.getPassword(), user.getPassword())) {
 			 	reponseModel.setCode(400);
-		 		reponseModel.setStatus("Fail");
+		 		reponseModel.setStatus("DEFAIL");
 		 		reponseModel.setInformation("パスワードが正しくありません");
 		 		reponseModel.setLoginData(loginModel);
 			 		return ResponseEntity.ok(reponseModel);
@@ -43,7 +43,7 @@ public class LoginController {
 //		 		ユーザー名とパスワードが正しくない
 //		 		status 設定
 		 		reponseModel.setCode(400);
-		 		reponseModel.setStatus("Fail");
+		 		reponseModel.setStatus("DEFAIL");
 		 		reponseModel.setInformation("ユーザー名が正しくない");
 				return ResponseEntity.status(400).body(reponseModel);
 		 	}

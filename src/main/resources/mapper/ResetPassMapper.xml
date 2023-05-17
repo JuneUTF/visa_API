@@ -10,7 +10,7 @@
 	WHERE username = #{username} and visa_id = #{visa_id} and birthday=#{birthdayDate} AND status='ACTIVE';
     </select>
     <update id="resetpass" parameterType="com.example.VisaAPI.model.ResetPassModel" >
-    UPDATE visa_user_api_role SET password = #{newpassword}
+    UPDATE visa_user_api_role SET password = #{encodePass}
 	WHERE username = #{username} AND status='ACTIVE';
     </update>
 
